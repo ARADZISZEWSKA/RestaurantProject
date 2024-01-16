@@ -1,0 +1,73 @@
+﻿@model Reservation
+
+<h2>Formularz rezerwacji</h2>
+
+<form method="post" class="row">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="NumberOfPeople"></label>
+        <select asp-for="NumberOfPeople" asp-items="@(new SelectList(Enumerable.Range(1, 4)))" class="form-control">
+            <option value="">Wybierz liczbę osób</option>
+        </select>
+        <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" pattern="\d*-\d*" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+
+    <div>
+        <label asp-for="SelectedHour"></label>
+        <select asp-for="SelectedHour" class="form-control">
+            <option value="">Wybierz godzinę</option>
+            @foreach (var hour in new List<string> { "10:00", "12:00", "14:00", "16:00", "18:00" })
+            {
+                <option value="@hour">@hour</option>
+            }
+        </select>
+        <span asp-validation-for="SelectedHour" class="text-danger"></span>
+    </div>
+
+    <div class="py-2">
+        <label asp-for="Note"></label>
+        <textarea asp-for="Note" class="form-control"></textarea>
+    </div>
+
+    
+    <div class="row pt-2">
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+        </div>
+        <div class="col-6 col-md-3">
+            <a asp-controller="Reservation" asp-action="Index" class="btn btn-outline-primary border form-control">
+                Wróć
+            </a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

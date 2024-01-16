@@ -1,0 +1,67 @@
+﻿@model MenuItemsVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.MenuItem.Id != 0 ? "Edytuj":"Utwórz") Menu </h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="MenuItem.Id" hidden /> 
+            @* umożliwia kontrolerowi odróżnienie, którą pozycję chcemy zmodyfikować *@
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="MenuItem.Name" class="form-control border-0 shadow" />
+                    <label asp-for="MenuItem.Name" class="ms-2"></label>
+                    <span asp-validation-for="MenuItem.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <textarea asp-for="MenuItem.Description" class="form-control border-0 shadow"></textarea>
+                    <label asp-for="MenuItem.Description" class="ms-2"></label>
+                    <span asp-validation-for="MenuItem.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="MenuItem.Price" class="form-control border-0 shadow" />
+                    <label asp-for="MenuItem.Price" class="ms-2"></label>
+                    <span asp-validation-for="MenuItem.Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="MenuItem.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                        <option disabled selected>--Wybierz Kategorię--</option>
+                    </select>
+                    <label asp-for="MenuItem.CategoryId" class="ms-2"></label>
+                    <span asp-validation-for="MenuItem.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (Model.MenuItem.Id != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control"> Edytuj </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control"> Utwórz </button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="MenuItems" asp-action="Index" class="btn btn-outline-primary border form-control">
+                           Wróć
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantPageProject.Data;
 
@@ -11,9 +12,11 @@ using RestaurantPageProject.Data;
 namespace RestaurantPageProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225152837_UpdateDBS")]
+    partial class UpdateDBS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -72,9 +75,6 @@ namespace RestaurantPageProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,15 +89,12 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Menu", (string)null);
+                    b.ToTable("Menu");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CategoryId = 1,
                             Description = "Puszysty croissant wegański z nadzieniem z malin.",
                             Name = "Croissant z malinami",
                             Price = 22.0
@@ -105,7 +102,6 @@ namespace RestaurantPageProject.Migrations
                         new
                         {
                             Id = 2,
-                            CategoryId = 2,
                             Description = "Delikatny croissant bezglutenowy z serkiem i wędzonym łososiem.",
                             Name = "Croissant z serkiem i łososiem",
                             Price = 20.0
@@ -113,7 +109,6 @@ namespace RestaurantPageProject.Migrations
                         new
                         {
                             Id = 3,
-                            CategoryId = 3,
                             Description = "Klasyczna bułeczka bez dodatku cukru, obsypana chrupkimi pistacjami.",
                             Name = "Bułeczka z pistacjami",
                             Price = 18.0
@@ -155,18 +150,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reservations", (string)null);
-                });
-
-            modelBuilder.Entity("RestaurantPageProject.Models.MenuItems", b =>
-                {
-                    b.HasOne("RestaurantPageProject.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                    b.ToTable("Reservations");
                 });
 #pragma warning restore 612, 618
         }

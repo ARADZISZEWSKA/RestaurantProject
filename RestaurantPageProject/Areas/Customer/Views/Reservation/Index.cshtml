@@ -1,0 +1,32 @@
+﻿@model Reservation
+@{
+    ViewData["Title"] = "Rezerwacja";
+}
+
+<div class="card shadow border-0 my-4 text-align: center">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="my-4 py-3"> Jeżeli chcesz zarezerwować stolik kliknij w poniższy przycisk </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h5 class="p-3">Jeżeli chcesz:</h5>
+            <ul class="list-style-type: disc color:gray font-size: 10px ">
+                <li>dokonać rezerwacji na liczbę osób, większą niż 4, </li>
+                <li>zorganizować impreze okolicznościową,</li>
+                <li>zarezerwować konkretny stolik lub masz jakiekolwiek pytania,</li>
+                <li>skontaktuj się z nami telefonicznie pod numerem: 890890890</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row my-4 pb-3">
+        <div class="col-12 text-center">
+            <a asp-controller="Reservation" asp-action="Reserve" class="btn btn-primary">
+                <i class="bi bi-calendar-plus"></i> ZAREZERWUJ
+            </a>
+        </div>
+    </div>
+
+</div>
+

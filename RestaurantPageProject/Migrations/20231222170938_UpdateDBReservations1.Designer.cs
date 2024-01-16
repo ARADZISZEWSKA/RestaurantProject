@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantPageProject.Data;
 
@@ -11,9 +12,11 @@ using RestaurantPageProject.Data;
 namespace RestaurantPageProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231222170938_UpdateDBReservations1")]
+    partial class UpdateDBReservations1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,26 +44,26 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Wegańskie"
+                            Name = "Croissanty słodkie"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "Bezglutenowe"
+                            Name = "Croissanty słone"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "Bez cukru"
+                            Name = "Bułeczki"
                         });
                 });
 
@@ -71,9 +74,6 @@ namespace RestaurantPageProject.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -89,34 +89,29 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Menu", (string)null);
+                    b.ToTable("Menu");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CategoryId = 1,
-                            Description = "Puszysty croissant wegański z nadzieniem z malin.",
-                            Name = "Croissant z malinami",
-                            Price = 22.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            Description = "Delikatny croissant bezglutenowy z serkiem i wędzonym łososiem.",
-                            Name = "Croissant z serkiem i łososiem",
+                            Description = "Puszyste croissanty nadziewane kremowym mascarpone i świeżymi malinami.",
+                            Name = "Croissanty słodkie z mascarpone i malinami",
                             Price = 20.0
                         },
                         new
                         {
-                            Id = 3,
-                            CategoryId = 3,
-                            Description = "Klasyczna bułeczka bez dodatku cukru, obsypana chrupkimi pistacjami.",
-                            Name = "Bułeczka z pistacjami",
+                            Id = 2,
+                            Description = "Delikatne croissanty z serkiem i wędzonym łososiem.",
+                            Name = "Croissanty słone z serkiem i łososiem",
                             Price = 18.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Klasyczna bułeczka obsypana chrupkimi pistacjami.",
+                            Name = "Bułeczka z pistacjami",
+                            Price = 15.0
                         });
                 });
 
@@ -155,18 +150,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reservations", (string)null);
-                });
-
-            modelBuilder.Entity("RestaurantPageProject.Models.MenuItems", b =>
-                {
-                    b.HasOne("RestaurantPageProject.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                    b.ToTable("Reservations");
                 });
 #pragma warning restore 612, 618
         }

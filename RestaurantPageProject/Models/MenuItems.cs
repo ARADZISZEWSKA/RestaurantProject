@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace RestaurantPageProject.Models
 {
@@ -19,8 +21,14 @@ namespace RestaurantPageProject.Models
 
         [Required(ErrorMessage = "Pole jest wymagane.")]
         [DisplayName("Cena")]
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
-        
+        [Required(ErrorMessage = "Pole jest wymagane.")]
+        [DisplayName("Kategoria")]
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category { get; set; }
+
     }
 }

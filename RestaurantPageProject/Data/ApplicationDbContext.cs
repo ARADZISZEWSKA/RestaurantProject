@@ -12,56 +12,60 @@ namespace RestaurantPageProject.Data
 
         public DbSet<Category> Categories  { get; set; } //tworzy tabele
         public DbSet<MenuItems> Menu { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
 
-                 new Category
-                 {
-                     Id = 1,
-                     Name = "Croissanty słodkie",
-                     DisplayOrder = 1
-                 },
-                 new Category
-                 {
-                     Id = 2,
-                     Name = "Croissanty słone",
-                     DisplayOrder = 2
-                 },
-                 new Category
-                 {
-                     Id = 3,
-                     Name = "Bułeczki",
-                     DisplayOrder = 3
-                 }
- );
+                new Category
+                {
+                    Id = 1,
+                    Name = "Wegańskie",
+                    DisplayOrder = 1
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Bezglutenowe",
+                    DisplayOrder = 2
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Bez cukru",
+                    DisplayOrder = 3
+                }
+            );
 
+            // MenuItems
             modelBuilder.Entity<MenuItems>().HasData(
-
                 new MenuItems
                 {
                     Id = 1,
-                    Name = "Croissanty słodkie z mascarpone i malinami",
-                    Description = "Puszyste croissanty nadziewane kremowym mascarpone i świeżymi malinami.",
-                    Price = 20
+                    Name = "Croissant z malinami",
+                    Description = "Puszysty croissant wegański z nadzieniem z malin.",
+                    Price = 22,
+                    CategoryId = 1 // Wegańskie
                 },
                 new MenuItems
                 {
                     Id = 2,
-                    Name = "Croissanty słone z serkiem i łososiem",
-                    Description = "Delikatne croissanty z serkiem i wędzonym łososiem.",
-                    Price = 18
+                    Name = "Croissant z serkiem i łososiem",
+                    Description = "Delikatny croissant bezglutenowy z serkiem i wędzonym łososiem.",
+                    Price = 20,
+                    CategoryId = 2 // Bezglutenowe
                 },
                 new MenuItems
                 {
                     Id = 3,
                     Name = "Bułeczka z pistacjami",
-                    Description = "Klasyczna bułeczka obsypana chrupkimi pistacjami.",
-                    Price = 15
+                    Description = "Klasyczna bułeczka bez dodatku cukru, obsypana chrupkimi pistacjami.",
+                    Price = 18,
+                    CategoryId = 3 // Bez cukru
                 }
-            );
+                );
 
         }
 

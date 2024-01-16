@@ -1,0 +1,60 @@
+﻿@model List<MenuItems>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Menu </h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-12 text-end">
+                <a asp-controller="MenuItems" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Utwórz nową pozycję
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tblData" class=" table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th> Nazwa </th>
+                        <th> Opis </th>
+                        <th> Cena </th>
+                        <th> Kategoria </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @* @* <tbody>
+                    @* @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td class="font-italic"> @obj.Name </td>
+                            <td class="font-italic"> @obj.Description </td>
+                            <td class="font-italic"> @obj.Price </td>
+                            <td class="font-italic"> @obj.Category.Name </td>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="MenuItems" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                        <i class="bi bi-pencil-square"></i> Edytuj
+                                    </a>
+                                    <a asp-controller="MenuItems" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-secondary mx-2">
+                                        <i class="bi bi-trash-fill"></i> Usuń
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    } 
+                </tbody> *@
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/menuitem.js"></script>
+}
+

@@ -2,19 +2,21 @@
 using RestaurantPageProject.Data;
 using RestaurantPageProject.Models;
 
-namespace RestaurantPageProject.Controllers
+namespace RestaurantPageProject.Areas.Admin.Controllers
 {
-    public class MenuItemsController : Controller
+    [Area("Admin")]
+
+    public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public MenuItemsController(ApplicationDbContext db)
+        public CategoryController(ApplicationDbContext db)
         {
             _db = db;
         }
         public IActionResult Index()
         {
-            List<MenuItems> objMenuItemsList = _db.Menu.ToList();
-            return View(objMenuItemsList);
+            List<Category> objCategoryList = _db.Categories.ToList();
+            return View(objCategoryList);
         }
 
         public IActionResult Create()
@@ -22,14 +24,19 @@ namespace RestaurantPageProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(MenuItems obj) //obj jest to co wpiszemy w utworz kategorie
+        public IActionResult Create(Category obj) //obj jest to co wpiszemy w utworz kategorie
         {
+            //if (obj.Name == obj.DisplayOrder.ToString())
+            //{
+            //    ModelState.TryAddModelError("name", "Nazwa i Kolejność wyświetlania nie mogą być takie same.");
+            //}
+
             if (ModelState.IsValid)
             {
-                _db.Menu.Add(obj);
+                _db.Categories.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Utworzono nową pozycję";
-                return RedirectToAction("Index", "MenuItems");
+                TempData["success"] = "Utworzono nową kategorię";
+                return RedirectToAction("Index", "Category");
             }
             return View();
         }
@@ -41,7 +48,7 @@ namespace RestaurantPageProject.Controllers
                 return NotFound();
             }
 
-            MenuItems? categoryFromDb = _db.Menu.Find(id);
+            Category? categoryFromDb = _db.Categories.Find(id);
 
             if (categoryFromDb == null)
             {
@@ -50,15 +57,15 @@ namespace RestaurantPageProject.Controllers
             return View(categoryFromDb);
         }
         [HttpPost]
-        public IActionResult Edit(MenuItems obj)
+        public IActionResult Edit(Category obj)
         {
 
             if (ModelState.IsValid)
             {
-                _db.Menu.Update(obj);
+                _db.Categories.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Edytowano pozycję";
-                return RedirectToAction("Index", "MenuItems");
+                TempData["success"] = "Edytowano kategorię";
+                return RedirectToAction("Index", "Category");
             }
             return View();
         }
@@ -69,7 +76,7 @@ namespace RestaurantPageProject.Controllers
                 return NotFound();
             }
 
-            MenuItems? categoryFromDb = _db.Menu.Find(id);
+            Category? categoryFromDb = _db.Categories.Find(id);
 
             if (categoryFromDb == null)
             {
@@ -81,19 +88,18 @@ namespace RestaurantPageProject.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            MenuItems? obj = _db.Menu.Find(id);
+            Category? obj = _db.Categories.Find(id);
 
             if (id == null)
             {
                 return NotFound();
             }
-            _db.Menu.Remove(obj);
+            _db.Categories.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Pozycja została usunięta";
-            return RedirectToAction("Index", "MenuItems");
+            TempData["success"] = "Kategoria została usunięta";
+            return RedirectToAction("Index", "Category");
 
 
         }
     }
 }
-
