@@ -8,6 +8,7 @@ namespace RestaurantPageProject.Models
     public class MenuItems
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //dodane
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane.")]

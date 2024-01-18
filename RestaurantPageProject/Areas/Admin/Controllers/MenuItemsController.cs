@@ -59,10 +59,49 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Menu.Add(obj.MenuItem);
+                //_db.Menu.Add(obj.MenuItem);
+                //_db.SaveChanges();
+                //TempData["success"] = "Utworzono nową pozycję";
+                //return RedirectToAction("Index", "MenuItems");
+
+                //if (obj.MenuItem.Id == 0)
+                //{
+                //    _db.Menu.Add(obj.MenuItem);
+                //    TempData["success"] = "Utworzono nową pozycję";
+                //}
+                //else
+                //{
+                //    _db.Menu.Update(obj.MenuItem);
+                //    TempData["success"] = "Edytowano pozycję";
+                //}
+
+                //_db.SaveChanges();
+                //return RedirectToAction("Index", "MenuItems");
+                if (obj.MenuItem.Id == 0)
+                {
+                    _db.Menu.Add(obj.MenuItem);
+                    TempData["success"] = "Utworzono nową pozycję";
+                }
+                else
+                {
+                    var existingItem = _db.Menu.Find(obj.MenuItem.Id);
+                    if (existingItem != null)
+                    {
+                        // Jeśli istnieje, zaktualizuj dane
+                        _db.Entry(existingItem).CurrentValues.SetValues(obj.MenuItem);
+                        TempData["success"] = "Edytowano pozycję";
+                    }
+                    else
+                    {
+                        // Jeśli nie istnieje, wyświetl błąd
+                        TempData["error"] = "Nie można znaleźć pozycji do edycji";
+                        return RedirectToAction("Index", "MenuItems");
+                    }
+                }
+
                 _db.SaveChanges();
-                TempData["success"] = "Utworzono nową pozycję";
                 return RedirectToAction("Index", "MenuItems");
+
             }
             else //jesli model jest invalid - ponownie wyświetla formularz, a obj.CategoryList ponownie wypełnia listą kategorii. Bez tego, rozwijalna lista kategorii w formularzu mogłaby być pusta
             {
@@ -104,38 +143,38 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
         //    }
         //    return View();
         //}
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
+        //public IActionResult Delete(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
 
-            MenuItems? categoryFromDb = _db.Menu.Find(id);
+        //    MenuItems? categoryFromDb = _db.Menu.Find(id);
 
-            if (categoryFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(categoryFromDb);
-        }
+        //    if (categoryFromDb == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(categoryFromDb);
+        //}
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            MenuItems? obj = _db.Menu.Find(id);
+        //[HttpPost, ActionName("Delete")]
+        //public IActionResult DeletePOST(int? id)
+        //{
+        //    MenuItems? obj = _db.Menu.Find(id);
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-            _db.Menu.Remove(obj);
-            _db.SaveChanges();
-            TempData["success"] = "Pozycja została usunięta";
-            return RedirectToAction("Index", "MenuItems");
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    _db.Menu.Remove(obj);
+        //    _db.SaveChanges();
+        //    TempData["success"] = "Pozycja została usunięta";
+        //    return RedirectToAction("Index", "MenuItems");
 
 
-        }
+        //}
 
         #region APICALLS 
 
@@ -144,6 +183,22 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
         {
             List<MenuItems> objMenuItemsList = _menuRepository.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = objMenuItemsList });
+        }
+
+          
+        public IActionResult Delete(int? id)
+        {
+            var deletedItem = _menuRepository.Get(u => u.Id == id);
+            if(deletedItem == null)
+            {
+                return Json(new { success = false, message = "Nie udało się usunąć." });
+            }
+
+            _menuRepository.Remove(deletedItem); 
+            _db.SaveChanges();
+
+            TempData["success"] = "Pozycja została usunięta";
+            return RedirectToAction("Index", "MenuItems");
         }
 
         #endregion
