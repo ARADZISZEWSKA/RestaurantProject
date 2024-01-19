@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantPageProject.Models;
+using RestaurantPageProject.Repository;
 using System.Diagnostics;
 
 namespace RestaurantPageProject.Areas.Customer.Controllers
@@ -8,21 +9,19 @@ namespace RestaurantPageProject.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IRepository<MenuItems> _menuItems;
+        public HomeController(ILogger<HomeController> logger, IRepository<MenuItems> menuItems)
         {
             _logger = logger;
+            _menuItems = menuItems;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<MenuItems> menuItems = _menuItems.GetAll(includeProperties: "Category");
+            return View(menuItems);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

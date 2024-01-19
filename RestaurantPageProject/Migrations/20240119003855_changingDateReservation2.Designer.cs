@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantPageProject.Data;
 
@@ -11,9 +12,11 @@ using RestaurantPageProject.Data;
 namespace RestaurantPageProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119003855_changingDateReservation2")]
+    partial class changingDateReservation2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -92,7 +95,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Menu", (string)null);
+                    b.ToTable("Menu");
 
                     b.HasData(
                         new
@@ -156,7 +159,7 @@ namespace RestaurantPageProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("RestaurantPageProject.Models.MenuItems", b =>

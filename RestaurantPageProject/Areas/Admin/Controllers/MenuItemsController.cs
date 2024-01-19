@@ -64,19 +64,7 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
                 //TempData["success"] = "Utworzono nową pozycję";
                 //return RedirectToAction("Index", "MenuItems");
 
-                //if (obj.MenuItem.Id == 0)
-                //{
-                //    _db.Menu.Add(obj.MenuItem);
-                //    TempData["success"] = "Utworzono nową pozycję";
-                //}
-                //else
-                //{
-                //    _db.Menu.Update(obj.MenuItem);
-                //    TempData["success"] = "Edytowano pozycję";
-                //}
-
-                //_db.SaveChanges();
-                //return RedirectToAction("Index", "MenuItems");
+               
                 if (obj.MenuItem.Id == 0)
                 {
                     _db.Menu.Add(obj.MenuItem);

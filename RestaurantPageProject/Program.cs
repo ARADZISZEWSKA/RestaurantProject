@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IRepository<Category>, Repository<Category>>();
 builder.Services.AddScoped<IRepository<MenuItems>, Repository<MenuItems>>();
+builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
+
 
 
 

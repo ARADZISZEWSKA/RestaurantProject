@@ -31,7 +31,7 @@ namespace RestaurantPageProject.Models
 
         [Required(ErrorMessage = "Pole jest wymagane.")]
         [DisplayName("Data")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Pole jest wymagane.")]
         [DisplayName("Godzina")]

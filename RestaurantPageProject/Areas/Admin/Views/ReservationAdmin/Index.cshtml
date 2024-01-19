@@ -1,0 +1,65 @@
+﻿@model List<Reservation>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Rezerwacje </h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-12 text-end">
+                <a asp-controller="Reservation" asp-action="Reserve" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Utwórz nową rezerwację
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tblReservations" class=" table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th> Imię </th>
+                        <th> Nazwisko </th>
+                        <th> Liczba osób </th>
+                        <th> Numer telefonu </th>
+                        <th> Data </th>
+                        <th> Godzina </th>
+                        <th> Notatka </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.Name) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.LastName) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.NumberOfPeople) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.PhoneNumber) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.Date) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.SelectedHour) </td>
+                            <td class="font-italic"> @Html.DisplayFor(modelItem => item.Note) </td>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                                        <i class="bi bi-pencil-square"></i> Edytuj
+                                    </a>
+                                    <a asp-controller="Reservation" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary mx-2">
+                                        <i class="bi bi-trash-fill"></i> Usuń
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/reservation.js"></script>
+}

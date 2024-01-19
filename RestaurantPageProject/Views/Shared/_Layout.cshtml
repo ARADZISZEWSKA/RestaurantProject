@@ -29,17 +29,17 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Reservation" asp-action="Index">Zarezerwuj stolik</a>
                         </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Menadżer
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MenuItems" asp-action="Index">Edytor Menu</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ReservationAdmin" asp-action="Index">Zarządzaj Rezerwacjami</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MenuItems" asp-action="Index">Zmień Menu</a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="nav-item">
