@@ -1,10 +1,80 @@
-﻿@model List<MenuItems>
+﻿@model List<CategoryWithMenuItemsVM>
 
-@foreach (var menuItem in Model)
-{
-    <div>
-        <h3>@menuItem.Name</h3>
-        <p>@menuItem.Description</p>
-        <p>Price: @menuItem.Price</p>
-    </div>
-}
+<div class="container">
+    @foreach (var categoryWithMenuItems in Model)
+    {
+        <div class="row my-4">
+            <div class="col-12">
+                <h2>@categoryWithMenuItems.MenuItemsList.FirstOrDefault()?.Category.Name</h2>
+            </div>
+        </div>
+
+        <div class="row pb-3">
+            @foreach (var menuItem in categoryWithMenuItems.MenuItemsList)
+            {
+                <div class="col-lg-6">
+                    <div class="row p-2">
+                        <div class="col-12 p-1">
+                            <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                                <div class="row card-body pb-0">
+                                    <div class="col-8 pl-1">
+                                        <p class="card-title h5 text-dark opacity-75 text-uppercase">@menuItem.Name</p>
+                                        <p class="card-text ">@menuItem.Description</p>
+                                    </div>
+                                    <div class="col-4 text-dark text-opacity-75 text-center">
+                                        Cena:
+                                        <span>
+                                            @menuItem.Price?.ToString("c")
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>                 
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+
+
+
+@* @model List<MenuItems>
+
+<div class="container">
+    @foreach (var group in Model.GroupBy(item => item.Category))
+    {
+        <div class="row pb-3">
+            <div class="col-12">
+                <h2 class="text-uppercase">@group.Key</h2>
+            </div>
+        </div>
+
+        <div class="row pb-3">
+            @foreach (var item in group)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="row p-2">
+                        <div class="col-12 p-1">
+                            <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                                <div class="card-body pb-0">
+                                    <div class="pl-1">
+                                        <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@item.Name</p>
+                                    </div>
+                                    <div class="text-dark text-opacity-75 text-center">
+                                        Cena:
+                                        <span>
+                                            @item.Price.Value.ToString("c")
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div> *@
