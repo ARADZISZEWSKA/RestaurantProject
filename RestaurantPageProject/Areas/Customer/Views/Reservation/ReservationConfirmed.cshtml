@@ -4,13 +4,47 @@
     Layout = "_Layout";
 }
 
-<h2>Dziekujemy</h2>
+<div class="container">
+    <div class="card shadow border-0 my-4 text-align: center">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="my-4 py-3">Dziękujemy za rezerwację</h2>
+            </div>
+        </div>
+        <div class="row my-4 pb-3">
+            <div class="col-6 col-md-3 mx-auto">
+                <a asp-controller="Reservation" asp-action="Index" class="btn btn-primary border form-control">
+                    Wróć
+                </a>
+            </div>
+        </div>
+        @if (Model != null && Model.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h4>Twoja rezerwacja:</h4>
+                    <ul>
+                        @foreach (var reservation in Model)
+                        {
+                            <li>
+                                <strong>Imię:</strong> @reservation.Name<br />
+                                <strong>Nazwisko:</strong> @reservation.LastName<br />
+                                <strong>Liczba osób:</strong> @reservation.NumberOfPeople<br />
+                                <strong>Numer telefonu:</strong> @reservation.PhoneNumber<br />
+                                <strong>Data:</strong> @reservation.Date.ToShortDateString()<br />
+                                <strong>Godzina:</strong> @reservation.SelectedHour<br />
+                                @if (!string.IsNullOrEmpty(reservation.Note))
+                                {
+                                    <strong>Uwagi:</strong> @reservation.Note
 
-
-<div class="row pt-2"> 
-    <div class="col-6 col-md-3">
-        <a asp-controller="Reservation" asp-action="Index" class="btn btn-outline-primary border form-control">
-            Wróć
-        </a>
+                                    <br />
+                                }
+                            </li>
+                            <br />
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
     </div>
 </div>

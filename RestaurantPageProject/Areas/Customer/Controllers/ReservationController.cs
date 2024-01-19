@@ -42,7 +42,7 @@ namespace RestaurantPageProject.Areas.Customer.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost] //do wyswietlenia rezerwacji przy ,,dziękuje,,
         public ActionResult ReservationConfirmedPOST()
         {
             var reservations = _db.Reservations.ToList();

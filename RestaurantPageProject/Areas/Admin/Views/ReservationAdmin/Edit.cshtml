@@ -1,0 +1,68 @@
+﻿@model Reservation
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient mt-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Edytuj Rezerwację </h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="LastName" class="form-control border-0 shadow" />
+                    <label asp-for="LastName" class="ms-2"></label>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="NumberOfPeople" class="form-control border-0 shadow" />
+                    <label asp-for="NumberOfPeople" class="ms-2"></label>
+                    <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="PhoneNumber" class="form-control border-0 shadow" />
+                    <label asp-for="PhoneNumber" class="ms-2"></label>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Date" type="date" class="form-control border-0 shadow" />
+                    <label asp-for="Date" class="ms-2"></label>
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="SelectedHour" class="form-control border-0 shadow" />
+                    <label asp-for="SelectedHour" class="ms-2"></label>
+                    <span asp-validation-for="SelectedHour" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <textarea asp-for="Note" class="form-control border-0 shadow"></textarea>
+                    <label asp-for="Note" class="ms-2"></label>
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control"> Edytuj </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="ReservationAdmin" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Wróć
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -108,6 +108,27 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
             return _db.Reservations.Any(e => e.Id == id);
         }
 
+        public ActionResult Reserve()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Reserve(Reservation model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Reservations.Add(model);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+        public ActionResult ReservationConfirmed()
+        {
+            return View();
+        }
 
         #region APICALL
         [HttpGet]
