@@ -1,10 +1,18 @@
 ﻿@page
+@using RestaurantPageProject
 @model RegisterModel
 @{
     ViewData["Title"] = "Zarejestruj się";
 }
 
-<h1>@ViewData["Title"]</h1>
+@if (User.IsInRole(StaticDetails.Role_Admin))
+{
+    <h1>Zarejestruj - ADMIN</h1>
+}
+else
+{
+    <h1>@ViewData["Title"]</h1>
+}
 
 <div class="row">
     <div class="col-md-6">
@@ -27,9 +35,19 @@
                 <label asp-for="Input.ConfirmPassword">Potwierdź hasło</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            @if (User.IsInRole(StaticDetails.Role_Admin))
+            {
+                <div class="form-floating mb-3 col-md-6">
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                    <option disabled selected>--Wybierz użytkownika--</option>
+                </select>
+            </div>
+            }
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Zarejestruj</button>
         </form>
     </div>
+    @if (!User.IsInRole(StaticDetails.Role_Admin))
+    {
     <div class="col-md-12 pd-3 text-center col-md-offset-2">
         <section>
             <h5 class="pd-5">Lub zaloguj się używając:</h5>
@@ -59,7 +77,8 @@
                 }
             }
         </section>
-    </div>
+    </div>       
+    }
 </div>
 
 @section Scripts {

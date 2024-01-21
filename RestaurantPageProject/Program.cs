@@ -19,7 +19,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(1); //Okreœla maksymalny czas bezczynnoœci sesji - nieaktywna->>usuniêta
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(3); //Okreœla maksymalny czas bezczynnoœci sesji - nieaktywna->>usuniêta
     options.Cookie.HttpOnly = true; //cookie nie bêdzie dostêpny za poœrednictwem jêzyka JavaScript /Cross-Site S.
     options.Cookie.IsEssential = true;//cookie sesji jest istotny dla dzia³ania aplikacji i nie powinien byæ automatycznie usuwany, nawet jeœli u¿ytkownik wy³¹czy obs³ugê plików cookie w przegl¹darce.
     options.SlidingExpiration = true; //pozwala sesji pozostaæ aktywn¹, je¿eli u¿ytkownik aktywnie korzysta z aplikacji.
@@ -34,7 +34,7 @@ builder.Services.AddAuthentication().AddFacebook(options =>
 builder.Services.AddDistributedMemoryCache(); // Dodaje pamiêæ podrêczn¹ (cache)
 builder.Services.AddSession(options => //Dodaje obs³ugê sesji do aplikacji. Sesja pozwala na przechowywanie danych o stanie miêdzy ¿¹daniami HTTP
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(1); //Okreœla maksymalny czas bezczynnoœci sesji - nieaktywna->>usuniêta
+    options.IdleTimeout = TimeSpan.FromMinutes(3); //Okreœla maksymalny czas bezczynnoœci sesji - nieaktywna->>usuniêta
     options.Cookie.HttpOnly = true; //cookie nie bêdzie dostêpny za poœrednictwem jêzyka JavaScript /Cross-Site S.
     options.Cookie.IsEssential = true; //cookie sesji jest istotny dla dzia³ania aplikacji i nie powinien byæ automatycznie usuwany, nawet jeœli u¿ytkownik wy³¹czy obs³ugê plików cookie w przegl¹darce.
 });
