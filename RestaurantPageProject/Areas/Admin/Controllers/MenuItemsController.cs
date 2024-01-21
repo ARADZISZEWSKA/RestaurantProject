@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 using RestaurantPageProject.Data;
@@ -11,6 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace RestaurantPageProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =StaticDetails.Role_Admin)]
     public class MenuItemsController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -31,7 +33,7 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
             return View(objMenuItemsList);
         }
 
-        public IActionResult Upsert(int? id) //update+insert
+        public IActionResult Upsert(int? id) //update+create
         {
             MenuItemsVM menuItemVM = new() //mozemy tylko 1 obiekt przekazać w View, dlatego łączymy
             {

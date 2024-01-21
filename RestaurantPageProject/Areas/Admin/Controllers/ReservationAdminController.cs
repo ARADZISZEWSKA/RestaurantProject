@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace RestaurantPageProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =StaticDetails.Role_Admin)]
     public class ReservationAdminController : Controller
     {
         private readonly ApplicationDbContext _db;
