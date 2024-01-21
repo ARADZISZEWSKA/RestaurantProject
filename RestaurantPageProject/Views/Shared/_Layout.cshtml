@@ -30,7 +30,12 @@
                          <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Reservation" asp-action="Index">Zarezerwuj stolik</a>
                          </li>
-                        
+                        @if (User.IsInRole(StaticDetails.Role_Customer))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-controller="ManageReservationCustomer" asp-action="Index">Zarządzaj</a>
+                            </li>
+                        }
                         @if (User.IsInRole(StaticDetails.Role_Admin))
                         {
                             <li class="nav-item dropdown">
