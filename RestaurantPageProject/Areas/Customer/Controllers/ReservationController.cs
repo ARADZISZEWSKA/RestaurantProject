@@ -37,9 +37,13 @@ namespace RestaurantPageProject.Areas.Customer.Controllers
         [HttpPost]
         public ActionResult Reserve(Reservation model)
         {
+            //custom validation
+            if(model.Name == model.LastName)
+            {
+                ModelState.AddModelError("name", "Imię i Nazwisko nie mogą być takie same.");
+            }
             if (ModelState.IsValid)
             {
-
                 _db.Reservations.Add(model);
                 _db.SaveChanges();
 

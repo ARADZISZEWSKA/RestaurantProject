@@ -27,10 +27,11 @@ namespace RestaurantPageProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Category obj) //obj jest to co wpiszemy w utworz kategorie
         {
-            //if (obj.Name == obj.DisplayOrder.ToString())
-            //{
-            //    ModelState.TryAddModelError("name", "Nazwa i Kolejność wyświetlania nie mogą być takie same.");
-            //}
+            //custom validation
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.TryAddModelError("name", "Nazwa i Kolejność wyświetlania nie mogą być takie same.");
+            }
 
             if (ModelState.IsValid)
             {
